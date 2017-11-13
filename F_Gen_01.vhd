@@ -26,8 +26,8 @@ begin
 		if (count = 10800000 - 1) then -- rising edge of generated signal
 			temp <= not(temp); -- low -> high
 			count <= count + 1;
-		elsif (count = 12E6 - 1) then
-			temp <= not(temp);
+		elsif (count = 12E6 - 1) then -- falling edge of generated signal
+			temp <= not(temp); --high -> low
 			count <= 0;
 		else
 			count <= count + 1;
