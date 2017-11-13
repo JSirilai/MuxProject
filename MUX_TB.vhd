@@ -23,28 +23,28 @@ architecture Testbench of MUX_TB is
 	end component;
 	signal input : STD_LOGIC_VECTOR (1 downto 0);
 	signal output, C_in : STD_LOGIC;
-	constant Period : time := 83.3333 ns;
+	constant Period : time := 83.3333 ns;                  -- 12MHz clock
 begin
 	uut : MUX
-	port map(S => input, LED => output, CLK => C_in);
+	port map(S => input, LED => output, CLK => C_in);      -- MUX Called
 
-	Clock : process
+	Clock : process                                        -- 12MHz 50% duty cycle clock generator
 	begin
-		C_in <= '0';
+		C_in <= '0';                                      -- low
 		wait for period/2;
-		C_in <= '1';
+		C_in <= '1';                                      -- high
 		wait for period/2;
 	end process Clock;
 
-	simulus : process
+	simulus : process                                     -- MUX simulation                        
 	begin
-		input <= "00";
-		wait for 2 sec;
-		input <= "01";
-		wait for 2 sec;
-		input <= "10";
-		wait for 2 sec;
-		input <= "11";
-		wait for 2 sec;
+		input <= "00";                                    -- choose S0 = '0' and S1 = '0'
+		wait for 2 sec;                                   -- hold S0 = '0' and S1 = '0' 2 sec
+		input <= "01";                                    -- choose S0 = '0' and S1 = '1'
+		wait for 2 sec;                                   -- hold S0 = '0' and S1 = '1' 2 sec
+		input <= "10";                                    -- choose S0 = '1' and S1 = '0'
+		wait for 2 sec;                                   -- hold S0 = '1' and S1 = '0' 2 sec
+		input <= "11";                                    -- choose S0 = '1' and S1 = '1'
+		wait for 2 sec;                                   -- hold S0 = '1' and S1 = '1' 2 sec
 	end process simulus;
 end Testbench;
