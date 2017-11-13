@@ -12,20 +12,23 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity F_Gen_01 is
 	port (
-		CLK_IN : in STD_LOGIC;                              -- clock signal input
-	S_OUT : out STD_LOGIC);                               -- clock signal output
+		CLK_IN  : in STD_LOGIC; -- clock signal input
+	S_OUT : out STD_LOGIC); -- clock signal output
 end F_Gen_01;
 
 architecture Behavioral of F_Gen_01 is
-	signal temp : STD_LOGIC;
-	signal count : integer range 0 to 12000000 - 1;
+	signal temp : STD_LOGIC := '0';
+	signal count : integer range 0 to 12E6 - 1;
 begin
 	S_OUT <= temp;
 	process (CLK_IN) begin
 	if rising_edge(CLK_IN) then
-		if (count = 10800000 - 1) then                     -- rising edge of generated signal
-			temp <= not(temp);                               -- low -> high
+		if (count = 10800000 - 1) then -- rising edge of generated signal
+			temp <= not(temp); -- low -> high
 			count <= count + 1;
+		elsif (count = 12E6 - 1) then
+			temp <= not(temp);
+			count <= 0;
 		else
 			count <= count + 1;
 		end if;
