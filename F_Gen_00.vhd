@@ -17,7 +17,7 @@ entity F_Gen_00 is
 end F_Gen_00;
 
 architecture Behavioral of F_Gen_00 is
-	signal temp : STD_LOGIC;
+	signal temp : STD_LOGIC:='0';
 	signal count : integer range 0 to 6000000 - 1;
 begin
 	S_OUT <= temp;
